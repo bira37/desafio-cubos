@@ -4,11 +4,11 @@ Desafio do processo seletivo para vaga de programador backend júnior na Cubos
 
 ## Especificação
 
-O desafio exigia a criação de uma API REST para facilitar o gerenciamento de horários de uma clínica. A API deveria ter como funcionalidade o cadastro de intervalos de horários para um determinado dia, intervalos de horário todos os dias e também para apenas alguns dias da semana. Deveria ser possível remover horários cadastrados e também listá-los, podendo filtrar os horários cadastrados num determinado intervalo de dias. Não era permitido o uso de banco de dados.
+O desafio exigia a criação de uma API REST para facilitar o gerenciamento de horários de uma clínica. A API deveria ter como funcionalidade o cadastro de intervalos de horários para um determinado dia, intervalos de horário todos os dias e também para apenas alguns dias da semana. Deveria ser possível remover horários cadastrados e também listá-los, podendo filtrar os horários cadastrados num determinado intervalo de dias. Não foi permitido o uso de banco de dados.
 
 ## Armazenamento dos dados
 
-Os dados da API foram armazenados em um arquivo JSON, encontrado no diretório 'data'. Caso este arquivo não exista, ele é criado após a primeira execução da API. Os horários armazenados foram divididos em três conjuntos: os horários diários, semanais e únicos. No primeiro conjunto são guardados todos os intervalos de horários disponíveis diariamente. O segundo conjunto guarda os intervalos disponíveis para cada dia da semana separadamente. Por fim, o último conjunto armazena os intervalos de horário de datas específicas. Cada intervalo de horário possui, além das informações exigidas, um identificador, que identifica a regra que o criou. Uma regra é definida como uma requisição de cadastro, que pode possuir mais de um intervalo de horário a ser cadastrado. Diferentes intervalos podem possuir o mesmo identificador, e isso implica que foram criados pela mesma regra.
+Os dados da API foram armazenados em um arquivo JSON, encontrado no diretório 'data'. Caso este arquivo não exista, ele é criado após a primeira execução da API. Os horários armazenados foram divididos em três conjuntos: os horários diários, semanais e únicos. No primeiro conjunto são guardados todos os intervalos de horários disponíveis diariamente. O segundo conjunto guarda os intervalos disponíveis para cada dia da semana separadamente. Por fim, o último conjunto armazena os intervalos de horário de datas específicas. Cada intervalo de horário possui, além das informações exigidas, um identificador, referente à regra que o criou. Uma regra é definida como uma requisição de cadastro, que pode possuir mais de um intervalo de horário a ser cadastrado. Diferentes intervalos podem possuir o mesmo identificador, e isso implica que foram criados pela mesma regra.
 
 ## Organização do repositório
 
@@ -24,7 +24,7 @@ npm install
 
 ## Executando os testes
 
-Para executar os testes basta executar o comando:
+Para executar os testes basta utilizar o comando:
 
 ```
 npm test
@@ -182,67 +182,67 @@ Esta requisição lista os horários disponíveis, no formato exigido, entre dua
 
 ```
 [
-  {
-    "day": "24-06-2018",
-    "intervals": [
-      {
-        "start": "09:30",
-        "end": "10:10"
-      }
-    ]
-  },
-  {
-    "day": "25-06-2018",
-    "intervals": [
-      {
-        "start": "08:30",
-        "end": "09:20"
-      },
-      {
-        "start": "09:30",
-        "end": "10:10"
-      },
-      {
-        "start": "10:30",
-        "end": "11:00"
-      }
-    ]
-  },
-  {
-    "day": "26-06-2018",
-    "intervals": [
-      {
-        "start": "09:30",
-        "end": "10:10"
-      },
-      {
-        "start": "14:00",
-        "end": "14:30"
-      }
-    ]
-  },
-  {
-    "day": "27-06-2018",
-    "intervals": [
-      {
-        "start": "09:30",
-        "end": "10:10"
-      }
-    ]
-  },
-  {
-    "day": "28-06-2018",
-    "intervals": [
-      {
-        "start": "09:30",
-        "end": "10:10"
-      },
-      {
-        "start": "14:00",
-        "end": "14:30"
-      }
-    ]
-  }
+    {
+        "day": "24-06-2018",
+        "intervals": [
+            {
+                "start": "09:30",
+                "end": "10:10"
+            }
+        ]
+    },
+    {
+        "day": "25-06-2018",
+        "intervals": [
+            {
+                "start": "08:30",
+                "end": "09:20"
+            },
+            {
+                "start": "09:30",
+                "end": "10:10"
+            },
+            {
+                "start": "10:30",
+                "end": "11:00"
+            },
+            {
+                "start": "14:00",
+                "end": "14:30"
+            }
+        ]
+    },
+    {
+        "day": "26-06-2018",
+        "intervals": [
+            {
+                "start": "09:30",
+                "end": "10:10"
+            }
+        ]
+    },
+    {
+        "day": "27-06-2018",
+        "intervals": [
+            {
+                "start": "09:30",
+                "end": "10:10"
+            },
+            {
+                "start": "14:00",
+                "end": "14:30"
+            }
+        ]
+    },
+    {
+        "day": "28-06-2018",
+        "intervals": [
+            {
+                "start": "09:30",
+                "end": "10:10"
+            }
+        ]
+    }
 ]
 ```
 
