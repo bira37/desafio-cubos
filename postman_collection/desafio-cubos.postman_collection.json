@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "7091cc67-b38d-4bbe-a93c-2cb492a69c8f",
+		"name": "desafio-cubos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Requisição de cadastro diário",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"daily\",\n\t\"intervals\": [\n\t\t{\n\t\t\t\"start\": \"09:30\",\n\t\t\t\"end\": \"10:10\"\n\t\t}\n\t] \n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/rules",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rules"
+					]
+				},
+				"description": "Exemplo da requisição diária (Disponível para atendimento diariamente das 09:30 às 10:10)."
+			},
+			"response": []
+		},
+		{
+			"name": "Requisição de cadastro semanal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"weekly\",\n\t\"days\": [\n\t\t{\n\t\t\t\"day\": \"Monday\",\n\t\t\t\"intervals\": [\n\t\t\t\t{\n\t\t\t\t\t\"start\": \"14:00\",\n\t\t\t\t\t\"end\": \"14:30\"\n\t\t\t\t}\n\t\t\t]\n\t\t},\n\t\t{\n\t\t\t\"day\": \"Wednesday\",\n\t\t\t\"intervals\": [\n\t\t\t\t{\n\t\t\t\t\t\"start\": \"14:00\",\n\t\t\t\t\t\"end\": \"14:30\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t] \n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/rules",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rules"
+					]
+				},
+				"description": "Exemplo de requisição semanal (Semanalmente está disponível para atendimento na segunda e na quarta-feira, das 14:00 às 14:30)."
+			},
+			"response": []
+		},
+		{
+			"name": "Requisição de cadastro de um dia (Falha por conta de conflito de intervalo)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "45abe2d7-e4c6-4b30-a1d1-c650a049f910",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"once\",\n\t\"dates\": [\n\t\t{\n\t\t\t\"date\": \"25-06-2018\",\n\t\t\t\"intervals\": [\n\t\t\t\t{\n\t\t\t\t\t\"start\": \"09:30\",\n\t\t\t\t\t\"end\": \"10:20\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"start\": \"10:30\",\n\t\t\t\t\t\"end\": \"11:00\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t] \n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/rules",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rules"
+					]
+				},
+				"description": "Exemplo de requisição de adicionar regra para único dia (Disponível dia 25/06/2018 nos intervalos de 09:30 até 10:20 e de 10:30 até às 11:00). Essa requisição falha pois já existe uma regra diária que conflita com o primeiro intervalo (e demonstra a capacidade da API de detectar intervalos conflitantes). Uma outra requisição com horários alterados para evitar conflito e demonstrar o cadastro dessa regra também pode ser encontrada na collection."
+			},
+			"response": []
+		},
+		{
+			"name": "Requisição de cadastro de um dia (Horários alterados para evitar conflito)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"once\",\n\t\"dates\": [\n\t\t{\n\t\t\t\"date\": \"25-06-2018\",\n\t\t\t\"intervals\": [\n\t\t\t\t{\n\t\t\t\t\t\"start\": \"08:30\",\n\t\t\t\t\t\"end\": \"09:20\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"start\": \"10:30\",\n\t\t\t\t\t\"end\": \"11:00\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t] \n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/rules",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rules"
+					]
+				},
+				"description": "Exemplo de requisição de adicionar regra para único dia (Disponível dia 25/06/2018 nos intervalos de 08:30 até 09:20 e de 10:30 até às 11:00). Essa requisição é uma alteração de outra com a mesma finalidade, com alteração apenas no horário para evitar conflito e causar um cadastro bem sucedido."
+			},
+			"response": []
+		},
+		{
+			"name": "Requisição de listagem de horários num intervalo de datas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/rules?start=24-06-2018&end=28-06-2018",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rules"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "24-06-2018"
+						},
+						{
+							"key": "end",
+							"value": "28-06-2018"
+						}
+					]
+				},
+				"description": "Requisição lista os horários cadastrados entre as datas de 24/06/2018 e 28/06/2018, no formato exigido no desafio. "
+			},
+			"response": []
+		},
+		{
+			"name": "Requisição de listagem de regras",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/rules",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rules"
+					]
+				},
+				"description": "Lista todas as regras cadastradas."
+			},
+			"response": []
+		},
+		{
+			"name": "Requisição de remoção de regra (Necessário substituir o endpoint por algum id válido)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/api/rules/<id>",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"rules",
+						"<id>"
+					]
+				},
+				"description": "Exemplo de requisição para deleção de uma regra cadastrada. É necessário utilizar um id obtido em alguma das requisições anteriores. Substitua o final do endpoint pelo id antes de enviar a requisição."
+			},
+			"response": []
+		}
+	]
+}
