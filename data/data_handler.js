@@ -45,10 +45,15 @@ module.exports = class DataHandler {
     let stringData = JSON.stringify(db, null, 2);
     fs.writeFileSync('data/database.json', stringData);
   }
-
+  
+  /* Get the day of the week from a date string */
   static getWeekDay(dateString){
     let [day, month, year] = dateString.split('-');
+    
+    /* Retrieve the day number */
     const weekDay = new Date(`${year}-${month}-${day}`).getUTCDay();
+    
+    /* Return the string */
     if(weekDay == 0) return 'Sunday';
     else if(weekDay == 1) return 'Monday';
     else if(weekDay == 2) return 'Tuesday';
@@ -163,7 +168,8 @@ module.exports = class DataHandler {
 
     return valid;
   }
-
+  
+  /* Validates Weekly Rule format */
   static validateWeeklyRule(rule){
     let valid = true;
 
@@ -210,7 +216,8 @@ module.exports = class DataHandler {
 
     return valid;
   }
-
+  
+  /* Validates Once Rule format */
   static validateOnceRule(rule){
     let valid = true;
 
@@ -254,7 +261,8 @@ module.exports = class DataHandler {
 
     return valid;
   }
-
+  
+  /* Inserts a daily rule */
   static insertDailyRule(rule){
     /* Read Database */
     let db = this.readDatabase();
@@ -272,7 +280,8 @@ module.exports = class DataHandler {
     /* Return the id of the rule */
     return id;
   }
-
+  
+  /* Inserts a weekly rule */
   static insertWeeklyRule(rule){
     /* Read database */
     let db = this.readDatabase();
@@ -293,7 +302,8 @@ module.exports = class DataHandler {
     /* Return the id of the rule */
     return id;
   }
-
+  
+  /* Inserts an once rule */
   static insertOnceRule(rule){
     /* Read database */
     let db = this.readDatabase();
@@ -317,7 +327,8 @@ module.exports = class DataHandler {
     /* Return the id of the rule */
     return id;
   }
-
+  
+  /* Return all the rules */
   static getAllRules(){
     /* Read database */
     let db = this.readDatabase();
@@ -325,7 +336,8 @@ module.exports = class DataHandler {
     /* Return database json */
     return db;
   }
-
+  
+  /* Returns all the rules in the date range formatted */
   static getRules(start, end){
     /* Read database */
     let db = this.readDatabase();
@@ -378,7 +390,8 @@ module.exports = class DataHandler {
 
     return ruleList;
   }
-
+  
+  /* Deletes rule by id */
   static deleteRule(ruleId){
     /* Read database */
     let db = this.readDatabase();
