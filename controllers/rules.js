@@ -76,7 +76,7 @@ exports.deleteRule = async (req, res) => {
   try {
     /* Delete Rules with given id */
     const deletedItems = DataHandler.deleteRule(req.params.id);
-    res.status(200).send({'message': 'Rules successfully deleted', 'deletedItems': deletedItems});
+    res.status(200).send({'message': 'Rule successfully deleted', 'deletedItems': deletedItems});
   }
   catch (err){
     res.status(400).send(err);
