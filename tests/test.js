@@ -64,7 +64,7 @@ describe('Check for correctness of valid post requests', () => {
     });
   });
 
-  describe('Register a once rule', () => {
+  describe('Register an once rule', () => {
     it('should be successful and return the id', done => {
       let body = {
         "type": "once",
